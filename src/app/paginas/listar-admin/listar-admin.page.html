@@ -1,0 +1,51 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>lista de Autos</ion-title>
+  </ion-toolbar>
+  <ion-grid>
+    <ion-row>
+      <ion-col><button [routerLink]="['/listar']">Modo Cliente</button></ion-col>
+      <ion-col><ion-card-subtitle>Administrador</ion-card-subtitle></ion-col>
+      <ion-col><button [routerLink]="['/agregar']">agregar</button></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngFor="let a of apiService.listaAutos$ | async"
+  [id]="a.id" >
+    <img [src]="a.foto" />
+    <ion-card-header>
+      <ion-card-title>{{ a.nombre }}</ion-card-title>
+      <ion-card-subtitle>Marca: {{ a.marca }}</ion-card-subtitle>
+      <ion-card-subtitle>Color: {{ a.color }}</ion-card-subtitle>
+      <ion-card-subtitle>Año: {{ a.year }}</ion-card-subtitle>
+      <ion-card-subtitle>Cilindros: {{ a.motorCilindros }}</ion-card-subtitle>
+      <ion-card-subtitle>Traccion: {{ a.traccion }}</ion-card-subtitle>
+      <ion-card-subtitle>Combustible: {{ a.combustible }}</ion-card-subtitle>
+      <ion-card-subtitle>Llantas: {{ a.llantas }}</ion-card-subtitle>
+      <ion-card-subtitle>Precio: {{ a.precio | currency: 'CLP' }}</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row class="ion-justify-content-between">
+          <ion-col size="6">
+            <ion-button [routerLink]="['/modificar',a.id]" color="secondary" size="small" >
+              <ion-icon name="pencil-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+          <ion-col size="6" class="ion-align-self-end" style="text-align: end;">
+            <ion-button [routerLink]="['/eliminar',a.id]" color="danger" size="small" >
+              <ion-icon name="trash-outline"></ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  <ion-infinite-scroll (ionInfinite)="cargarMasAutos()">
+    <ion-infinite-scroll-content
+      loadingText="Cargando ..."
+    ></ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>

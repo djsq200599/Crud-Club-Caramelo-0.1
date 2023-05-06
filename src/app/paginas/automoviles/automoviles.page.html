@@ -1,0 +1,44 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Automovil</ion-title>
+  </ion-toolbar>
+  <ion-grid>
+    <ion-row>
+      <ion-col><button [routerLink]="['/listar']">Atras</button></ion-col>
+      <ion-col></ion-col>
+      <ion-col><button [routerLink]="['/listar-carrito']">carrito</button></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content>
+  <ion-card *ngIf="autoActivo"
+  [id]="autoActivo.id">
+  <ion-img [src]="autoActivo.foto"></ion-img>
+    <ion-card-header>
+      <ion-card-title>
+        {{ autoActivo.nombre }}
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <br>
+      <ion-card-subtitle>Marca: {{ autoActivo.marca }}</ion-card-subtitle>
+      <ion-card-subtitle>Color: {{ autoActivo.color }}</ion-card-subtitle>
+      <ion-card-subtitle>Año: {{ autoActivo.year }}</ion-card-subtitle>
+      <ion-card-subtitle>Cilindros: {{ autoActivo.motorCilindros }}</ion-card-subtitle>
+      <ion-card-subtitle>Traccion: {{ autoActivo.traccion }}</ion-card-subtitle>
+      <ion-card-subtitle>Combustible: {{ autoActivo.combustible }}</ion-card-subtitle>
+      <ion-card-subtitle>Llantas: {{ autoActivo.llantas }}</ion-card-subtitle>
+      <ion-card-subtitle>Cantidad: {{ autoActivo.cantidad }}</ion-card-subtitle>
+      <ion-card-subtitle>Precio: {{ autoActivo.precio | currency: 'CLP' }}</ion-card-subtitle>
+      <br>
+      <ion-grid>
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col><ion-button color="success" (click)="addCart(autoActivo)">Agregar al carrito</ion-button></ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

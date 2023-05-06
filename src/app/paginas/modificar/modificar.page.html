@@ -1,0 +1,186 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>agregar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form novalidate [formGroup]="formulario" (ngSubmit)="modificarAuto()">
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input
+      formControlName="nombre" type="text"></ion-input>
+      <ion-note
+        slot="error"
+        *ngIf="obtenerCampo('nombre').invalid && obtenerCampo('nombre').errors && obtenerCampo('nombre').errors.required && fueTocado('nombre')
+        "
+        > Este campo es requerido</ion-note>
+      <ion-note
+        slot="error"
+        *ngIf="obtenerCampo('nombre').invalid && obtenerCampo('nombre').errors && obtenerCampo('nombre').errors.maxlength && fueTocado('nombre')
+        "
+        > La cantidad de caracteres maxima es 15</ion-note>
+      <ion-note
+        slot="error"
+        *ngIf="obtenerCampo('nombre').invalid && obtenerCampo('nombre').errors && obtenerCampo('nombre').errors.minlength && fueTocado('nombre')
+        "
+        > La cantidad de caracteres minima es 3</ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Marca</ion-label>
+      <ion-input
+      formControlName="marca" type="text"></ion-input>
+      <ion-note
+        slot="error"
+        *ngIf="obtenerCampo('marca').invalid && obtenerCampo('marca').errors && obtenerCampo('marca').errors.required && fueTocado('marca')
+        "
+        > Este campo es requerido</ion-note>
+      <ion-note
+        slot="error"
+        *ngIf="obtenerCampo('marca').invalid && obtenerCampo('marca').errors && obtenerCampo('marca').errors.maxlength && fueTocado('marca')
+        "
+        > La cantidad de caracteres maxima es 15</ion-note>
+      <ion-note
+        slot="error"
+        *ngIf="obtenerCampo('marca').invalid && obtenerCampo('marca').errors && obtenerCampo('marca').errors.minlength && fueTocado('marca')
+        "
+        > La cantidad de caracteres minima es 3</ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Color</ion-label>
+      <ion-input
+      formControlName="color" type="text"></ion-input>
+      <ion-note
+        slot="error"
+        *ngIf="obtenerCampo('color').invalid && obtenerCampo('color').errors && obtenerCampo('color').errors.required && fueTocado('color')
+        "
+        > Este campo es requerido</ion-note>
+      <ion-note
+        slot="error"
+        *ngIf="obtenerCampo('color').invalid && obtenerCampo('color').errors && obtenerCampo('color').errors.maxlength && fueTocado('color')
+        "
+        > La cantidad de caracteres maxima es 15</ion-note>
+      <ion-note
+        slot="error"
+        *ngIf="obtenerCampo('color').invalid && obtenerCampo('color').errors && obtenerCampo('color').errors.minlength && fueTocado('color')
+        "
+        > La cantidad de caracteres minima es 3</ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Año</ion-label>
+      <ion-input
+        formControlName="year"
+      type="number"></ion-input>
+      <ion-note
+        slot="error"
+        *ngIf="obtenerCampo('year').invalid && obtenerCampo('year').errors && obtenerCampo('year').errors.required && fueTocado('year')
+        "
+        > Este campo es requerido</ion-note>
+      <ion-note
+        slot="error"
+        *ngIf="obtenerCampo('year').invalid && obtenerCampo('year').errors && obtenerCampo('year').errors.max && fueTocado('year')
+        "
+        > El valor maximo es 100</ion-note>
+      <ion-note
+        slot="error"
+        *ngIf="obtenerCampo('year').invalid && obtenerCampo('year').errors && obtenerCampo('year').errors.min && fueTocado('year')
+        "
+        > El valor minimo es 0</ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Cilindros del motor</ion-label>
+      <ion-segment formControlName="motorCilindros">
+        <ion-segment-button
+          *ngFor="let mc of motorCilindros"
+          [value]="mc"
+        >
+        {{mc}}
+      </ion-segment-button>
+      </ion-segment>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Traccion</ion-label>
+      <ion-segment formControlName="traccion">
+        <ion-segment-button
+          *ngFor="let t of traccion"
+          [value]="t"
+        >
+        {{t}}
+      </ion-segment-button>
+      </ion-segment>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Combustible</ion-label>
+      <ion-segment formControlName="combustible">
+        <ion-segment-button
+          *ngFor="let cb of combustible"
+          [value]="cb"
+        >
+        {{cb}}
+      </ion-segment-button>
+      </ion-segment>
+
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Llantas</ion-label>
+      <ion-segment formControlName="llantas">
+        <ion-segment-button
+          *ngFor="let ll of llantas"
+          [value]="ll"
+        >
+        {{ll}}
+      </ion-segment-button>
+      </ion-segment>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="floating">Precio</ion-label>
+      <ion-input
+        formControlName="precio"
+      type="number"></ion-input>
+      <ion-note
+        slot="error"
+        *ngIf="obtenerCampo('precio').invalid && obtenerCampo('precio').errors && obtenerCampo('precio').errors.required && fueTocado('precio')
+        "
+        > Este campo es requerido</ion-note>
+      <ion-note
+        slot="error"
+        *ngIf="obtenerCampo('precio').invalid && obtenerCampo('precio').errors && obtenerCampo('precio').errors.max && fueTocado('precio')
+        "
+        > El valor maximo es 100</ion-note>
+      <ion-note
+        slot="error"
+        *ngIf="obtenerCampo('precio').invalid && obtenerCampo('precio').errors && obtenerCampo('precio').errors.min && fueTocado('precio')
+        "
+        > El valor minimo es 0</ion-note>
+    </ion-item>
+
+    <ion-item>
+      <ion-input
+        (change)="cambiarFoto($event)"
+        formControlName="foto"
+        type="file"
+      ></ion-input>
+      <ion-note
+        slot="error"
+        *ngIf="obtenerCampo('foto').invalid && obtenerCampo('foto').errors && obtenerCampo('foto').errors.required && fueTocado('foto')
+        "
+        > Este campo es requerido</ion-note>
+    </ion-item>
+    <ion-item>
+      <ion-button
+        type="submit"
+        [disabled]="formulario.invalid && !cargaArchivo"
+        >
+        Guardar
+      </ion-button>
+      <ion-button  [routerLink]="['/listar-admin']">volver</ion-button>
+    </ion-item>
+  </form>
+</ion-content>

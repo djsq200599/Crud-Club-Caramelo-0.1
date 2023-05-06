@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Carrito</ion-title>
+  </ion-toolbar>
+  <ion-grid>
+    <ion-row>
+      <ion-col><button [routerLink]="['/listar']">Inicio</button></ion-col>
+      <ion-col></ion-col>
+      <ion-col></ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-refresher slot="fixed" (ionRefresh)="handleRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-card *ngFor="let a of cart ">
+    <img [src]="a.foto" />
+    <ion-card-header>
+      <ion-card-title>{{ a.nombre }}</ion-card-title>
+      <br>
+      <ion-card-subtitle>Marca: {{ a.marca }}</ion-card-subtitle>
+      <ion-card-subtitle>Color: {{ a.color }}</ion-card-subtitle>
+      <ion-card-subtitle>Año: {{ a.year }}</ion-card-subtitle>
+      <ion-card-subtitle>Cilindros: {{ a.motorCilindros }}</ion-card-subtitle>
+      <ion-card-subtitle>Traccion: {{ a.traccion }}</ion-card-subtitle>
+      <ion-card-subtitle>Combustible: {{ a.combustible }}</ion-card-subtitle>
+      <ion-card-subtitle>Llantas: {{ a.llantas }}</ion-card-subtitle>
+      <ion-card-subtitle>Cantidad: {{ a.cantidad }}</ion-card-subtitle>
+      <ion-card-subtitle>Precio: {{ a.precio | currency: 'CLP' }}</ion-card-subtitle>
+      <br>
+      <ion-grid>
+        <ion-row>
+          <ion-col></ion-col>
+          <ion-col><ion-button (click)="eliminarAutos(a.id)" color="danger" >Eliminar</ion-button></ion-col>
+          <ion-col></ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-header>
+  </ion-card>
+</ion-content>
+<ion-item *ngIf="cart">
+  <ion-grid>
+    <ion-row>
+      <ion-col size="9">
+        Total :
+        <ion-col size="3">
+          {{obtenerTotalCarrito() | currency:'CLP'}}
+        </ion-col>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-item>

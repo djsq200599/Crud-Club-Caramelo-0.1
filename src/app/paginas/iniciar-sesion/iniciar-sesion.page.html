@@ -1,0 +1,64 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Iniciar sesion</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-card>
+      <ion-card-content>
+        <form [formGroup]="FormularioL" >
+          <ion-item>
+            <ion-label position="floating">Correo</ion-label>
+            <ion-input formControlName="correo"></ion-input>
+            <ion-note
+            slot="error"
+            *ngIf="obtenerCampo('correo').invalid && obtenerCampo('correo').errors && obtenerCampo('correo').errors.required && fueTocado('correo')"> Este campo es requerido</ion-note>
+            <ion-note
+            slot="error"
+            *ngIf="obtenerCampo('correo').invalid && obtenerCampo('correo').errors && obtenerCampo('correo').errors.maxlength && fueTocado('correo')
+            "
+            > La cantidad de caracteres maxima es 15</ion-note>
+            <ion-note
+            slot="error"
+            *ngIf="obtenerCampo('correo').invalid && obtenerCampo('correo').errors && obtenerCampo('correo').errors.maxlength && fueTocado('correo')
+            "
+            > La cantidad de caracteres maxima es 15</ion-note>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input formControlName="contraseña" type="password"></ion-input>
+            <ion-note
+            slot="error"
+            *ngIf="obtenerCampo('contraseña').invalid && obtenerCampo('contraseña').errors && obtenerCampo('contraseña').errors.required && fueTocado('contraseña')"> Este campo es requerido</ion-note>
+            <ion-note
+            slot="error"
+            *ngIf="obtenerCampo('contraseña').invalid && obtenerCampo('contraseña').errors && obtenerCampo('contraseña').errors.maxlength && fueTocado('contraseña')
+            "
+            > La cantidad de caracteres maxima es 15</ion-note>
+            <ion-note
+            slot="error"
+            *ngIf="obtenerCampo('contraseña').invalid && obtenerCampo('contraseña').errors && obtenerCampo('contraseña').errors.maxlength && fueTocado('contraseña')
+            "
+            > La cantidad de caracteres maxima es 15</ion-note>
+          </ion-item>
+        </form>
+        <br>
+        <ion-grid>
+          <ion-row>
+            <ion-col></ion-col>
+            <ion-col><ion-button color="primary" (click)="iniciarSesion()">Ingresar</ion-button></ion-col>
+            <ion-col></ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+  </ion-card>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/registro']">¿No tienes una cuenta? ¡Registrate¡</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>
+
