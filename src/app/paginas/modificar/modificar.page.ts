@@ -15,10 +15,6 @@ export class ModificarPage implements OnInit {
   public formulario: FormGroup;
   private imagenBase64 = '';
   public cargaArchivo = false;
-  public motorCilindros = [ "3", "4", "6" , "7" , "8" , "10" , "12" , "16" ]
-  public traccion = [ "2X4" , "4X4" ]
-  public combustible = [ "gasolina" , "diesel" , "petroleo" , "gas" , "electricidad" ]
-  public llantas = [ "aluminio" , "magnesio" , "aleacion" , "acero" ]
 
   constructor(
     private rutaActiva: ActivatedRoute,
@@ -30,16 +26,14 @@ export class ModificarPage implements OnInit {
   }
   public construirFormulario(): void {
     this.formulario = this.fb.group({
-      nombre: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
-      marca: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
-      color: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
-      year: [1950, [Validators.required, Validators.min(1950), Validators.max(2023)]],
-      motorCilindros: ['3', Validators.required],
-      traccion: ['2X4', Validators.required],
-      combustible: ['gasolina', Validators.required],
-      llantas: ['aluminio', Validators.required],
-      foto: ['', Validators.required],
-      precio: [1, [Validators.required, Validators.min(1000), Validators.max(30000000)]]
+      nombre: ['Club Caramelo', [Validators.required, Validators.minLength(1), Validators.maxLength(20)]],
+      ubicacion: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
+      direccion: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
+      tematica: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(100)]],
+      capacidad: [0, [Validators.required, Validators.min(1), Validators.max(30000000)]],
+      cantidad: [0, [Validators.required, Validators.min(1), Validators.max(30000000)]],
+      precio: [0, [Validators.required, Validators.min(1), Validators.max(30000000)]],
+      foto: ['', Validators.required]
     });
   }
   public obtenerCampo(control: string) {
@@ -78,13 +72,11 @@ export class ModificarPage implements OnInit {
           this.imagenBase64 = elemento.foto;
           this.AutoActivo = elemento;
           this.formulario.get('nombre').setValue(elemento.nombre);
-          this.formulario.get('marca').setValue(elemento.marca);
-          this.formulario.get('color').setValue(elemento.color);
-          this.formulario.get('year').setValue(elemento.year);
-          this.formulario.get('motorCilindro').setValue(elemento.motorCilindros);
-          this.formulario.get('traccion').setValue(elemento.traccion);
-          this.formulario.get('combustible').setValue(elemento.combustible);
-          this.formulario.get('llantas').setValue(elemento.llantas);
+          this.formulario.get('ubiacion').setValue(elemento.ubicacion);
+          this.formulario.get('direccion').setValue(elemento.direccion);
+          this.formulario.get('tematica').setValue(elemento.tematica);
+          this.formulario.get('capacidad').setValue(elemento.capacidad);
+          this.formulario.get('cantidad').setValue(elemento.cantidad);
           this.formulario.get('precio').setValue(elemento.precio);
           this.formulario.updateValueAndValidity();
         })

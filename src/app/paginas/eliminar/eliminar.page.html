@@ -1,14 +1,13 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Automovil</ion-title>
+    <ion-grid>
+      <ion-row>
+        <ion-col></ion-col>
+        <ion-col><ion-col style="color: rgb(177, 121, 0); font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: large ;">Club Caramelo Eliminar</ion-col></ion-col>
+        <ion-col></ion-col>
+      </ion-row>
+    </ion-grid>
   </ion-toolbar>
-  <ion-grid>
-    <ion-row>
-      <ion-col><button  [routerLink]="['/listar-admin']">Atras</button></ion-col>
-      <ion-col></ion-col>
-      <ion-col></ion-col>
-    </ion-row>
-  </ion-grid>
 </ion-header>
 
 <ion-content>
@@ -18,45 +17,21 @@
       <ion-img [src]="autoActivo.foto"></ion-img>
       <ion-card-title>
         {{ autoActivo.nombre }}
+        <br>
+        {{ autoActivo.ubicacion }}
       </ion-card-title>
     </ion-card-header>
     <ion-card-content>
-      <ion-list>
-        <ion-item>
-          <ion-label>Marca: {{ autoActivo.marca }}</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Color: {{ autoActivo.color }}</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Año: {{ autoActivo.year }}</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Cilindros del Motor: {{ autoActivo.motorCilindros }}</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Traccion: {{ autoActivo.traccion }}</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Combustible: {{ autoActivo.combustible}}</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Llantas: {{ autoActivo.llantas }}</ion-label>
-        </ion-item>
-        <ion-item>
-          <ion-label>Precio: {{ autoActivo.precio | currency: 'CLP' }}</ion-label>
-        </ion-item>
-      </ion-list>
     </ion-card-content>
     <ion-grid>
       <ion-row class="ion-justify-content-between">
         <ion-col size="6">
-          <ion-button [routerLink]="['/listar-admin']" color="secondary" size="small">
+          <ion-button [routerLink]="['/listar-admin']" color="warning" size="small">
             <ion-icon name="arrow-back-outline"></ion-icon>
           </ion-button>
         </ion-col>
         <ion-col size="6" class="ion-align-self-end" style="text-align: end;">
-          <ion-button (click)="borrar()" color="danger" size="small">
+          <ion-button (click)="borrar()" color="warning" size="small">
             <ion-icon name="trash-outline"></ion-icon>
           </ion-button>
         </ion-col>
