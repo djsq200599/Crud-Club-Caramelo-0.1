@@ -176,7 +176,7 @@
     <ion-item>
       <ion-button
         type="submit"
-        [disabled]="formulario.invalid && !cargaArchivo" size="small" color="warning" style="margin-left: auto; margin-right: auto;"><ion-icon name="pencil-sharp"></ion-icon>Modificar </ion-button>
+        [disabled]="formulario.invalid && !cargaArchivo" [routerLink]="['/listar-admin']" size="small" color="warning" style="margin-left: auto; margin-right: auto;"><ion-icon name="pencil-sharp"></ion-icon>Modificar </ion-button>
     </ion-item>
   </form>
 </ion-content>

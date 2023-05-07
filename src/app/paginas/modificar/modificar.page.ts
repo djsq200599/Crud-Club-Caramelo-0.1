@@ -95,7 +95,7 @@ export class ModificarPage implements OnInit {
     .subscribe(respuesta => {
       if(respuesta){
         console.log('Elemento Actualizado :D');
-        this.router.navigate(['']);
+        this.router.navigate(['/listar-admin']);
       }
     })
   }
