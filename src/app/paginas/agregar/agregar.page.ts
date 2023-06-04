@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, NonNullableFormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, NonNullableFormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
 import { ApiService } from './../../services/api.service';
 import { Automovil } from '../../modelo/automovil';
 import { Router } from '@angular/router';
-import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-agregar',

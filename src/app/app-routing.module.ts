@@ -42,7 +42,11 @@ const routes: Routes = [
   {
     path: 'iniciar-sesion',
     loadChildren: () => import('./paginas/iniciar-sesion/iniciar-sesion.module').then( m => m.IniciarSesionPageModule)
+  },  {
+    path: 'mapa',
+    loadChildren: () => import('./paginas/mapa/mapa.module').then( m => m.MapaPageModule)
   }
+
 ];
 
 @NgModule({

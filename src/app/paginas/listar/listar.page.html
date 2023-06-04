@@ -9,11 +9,7 @@
     </ion-grid>
   </ion-toolbar>
 </ion-header>
-<p>merequetengue y la queso papà</p>
-<p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ut hic accusantium deserunt impedit voluptatem? Explicabo reiciendis, dicta magnam nihil ipsa, aliquid itaque quisquam nesciunt illum, tempora beatae error voluptatum possimus.</p>
-<p></p>
-<p></p>
-<ion-buttoNN></ion-buttoN>
+
 <ion-content>
   <ion-card *ngFor="let a of autoMovil">
     <img [src]="a.foto" />
@@ -26,10 +22,10 @@
     </ion-card-header>
     <ion-grid>
       <ion-row>
-        <ion-col></ion-col>
-        <ion-col><ion-button fill="clear" [routerLink]="['/automoviles',a.id]" style="color: rgb(177, 121, 0); font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: large ;">Mas informacion</ion-button></ion-col>
-        <ion-col><ion-button fill="clear" (click)="ShareApp()" >
-          <ion-icon slot="start" ios="share" md="share" style="color: rgb(177, 121, 0);">Compartir</ion-icon>
+        <ion-col><ion-button [routerLink]="['/mapa']" size="medium" color="warning"><ion-icon name="map-outline"></ion-icon></ion-button></ion-col>
+        <ion-col><ion-button [routerLink]="['/automoviles',a.id]" size="medium" color="warning"><ion-icon name="add-outline"></ion-icon></ion-button></ion-col>
+        <ion-col><ion-button  (click)="ShareApp()" size="medium" color="warning">
+          <ion-icon name="share-outline"></ion-icon>
         </ion-button></ion-col>
       </ion-row>
     </ion-grid>
