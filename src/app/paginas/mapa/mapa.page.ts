@@ -11,7 +11,7 @@ export class MapaPage implements OnInit, OnDestroy {
 
   @ViewChild('map', {static: true}) mapElementRef: ElementRef;
   googleMaps: any;
-  center = { lat: 28.649944693035188, lng: 77.23961776224988 };
+  center = { lat: -33.45694, lng: -70.64827 };
   map: any;
   mapClickListener: any;
   markerClickListener: any;
