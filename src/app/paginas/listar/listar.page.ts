@@ -18,7 +18,7 @@ export class ListarPage implements OnInit {
     public apiCarrito: CarritoService
   ) { }
 
-
+  rating: number = 0;
 
   ngOnInit() {}
 
@@ -32,6 +32,7 @@ export class ListarPage implements OnInit {
     })
   }
 
+  
   public cargarMasAutos(){
     this.apiService.obtenerMasAutos();
   }
@@ -43,6 +44,7 @@ export class ListarPage implements OnInit {
 
   }
 
+  
   ShareApp(){
     Share.share({
       title: 'Mira este increible auto',
@@ -50,4 +52,34 @@ export class ListarPage implements OnInit {
       url: 'http://ionicframework.com/',
     });
   }
+
+  rate(value: number) {
+    if (this.rating === value) {
+      // Si la valoración seleccionada es la misma que la actual,
+      // deselecciona la estrella estableciendo el valor de rating a 0
+      this.rating = 0;
+    } else {
+      // Si la valoración seleccionada es diferente, asigna el nuevo valor
+      this.rating = value;
+    }
+  }
+  
+  highlightStar(value: number) {
+    for (let i = 1; i <= 5; i++) {
+      const starElement = document.getElementById(`star-${i}`);
+      if (i <= value) {
+        starElement?.classList.add('filled');
+      } else {
+        starElement?.classList.remove('filled');
+      }
+    }
+  }
+  
+  resetStars() {
+    for (let i = 1; i <= 5; i++) {
+      const starElement = document.getElementById(`star-${i}`);
+      starElement?.classList.remove('filled');
+    }
+  }
 }
+

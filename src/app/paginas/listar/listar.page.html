@@ -1,40 +1,48 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-grid>
-      <ion-row>
-        <ion-col><ion-button [routerLink]="['/iniciar-sesion']" size="small" color="warning" >Identificarse <ion-icon name="beer-outline"></ion-icon></ion-button></ion-col>
-        <ion-col><ion-col style="color: rgb(177, 121, 0); font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: large ;">Club Caramelo</ion-col></ion-col>
-        <ion-col><ion-button [routerLink]="['/listar-carrito']" size="small" color="warning">Reserva</ion-button></ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content>
   <ion-card *ngFor="let a of autoMovil">
     <img [src]="a.foto" />
     <ion-card-header>
       <ion-card-title>{{ a.nombre }}</ion-card-title>
-      <ion-card-title>{{ a.ubicacion}}</ion-card-title>
+      <ion-card-title>{{ a.ubicacion }}</ion-card-title>
       <br>
       <ion-card-subtitle>Direccion: {{ a.direccion }}</ion-card-subtitle>
       <ion-card-subtitle>Tematica: {{ a.tematica }}</ion-card-subtitle>
     </ion-card-header>
     <ion-grid>
       <ion-row>
-        <ion-col><ion-button [routerLink]="['/mapa']" size="medium" color="warning"><ion-icon name="map-outline"></ion-icon></ion-button></ion-col>
-        <ion-col><ion-button [routerLink]="['/automoviles',a.id]" size="medium" color="warning"><ion-icon name="add-outline"></ion-icon></ion-button></ion-col>
-        <ion-col><ion-button  (click)="ShareApp()" size="medium" color="warning">
-          <ion-icon name="share-outline"></ion-icon>
-        </ion-button></ion-col>
+        <ion-col>
+          <ion-button [routerLink]="['/mapa']" size="medium" color="warning">
+            <ion-icon name="map-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button [routerLink]="['/automoviles', a.id]" size="medium" color="warning">
+            <ion-icon name="add-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="ShareApp()" size="medium" color="warning">
+            <ion-icon name="share-outline"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col class="rating-col">
+          <!-- Valoración con iconos de estrellas -->
+          <div class="rating">
+            <ion-icon name="star" [ngClass]="{'filled': rating >= 1}" (mouseenter)="rating = 1" (mouseleave)="rating = 0" (click)="rate(1)"></ion-icon>
+            <ion-icon name="star" [ngClass]="{'filled': rating >= 2}" (mouseenter)="rating = 2" (mouseleave)="rating = 0" (click)="rate(2)"></ion-icon>
+            <ion-icon name="star" [ngClass]="{'filled': rating >= 3}" (mouseenter)="rating = 3" (mouseleave)="rating = 0" (click)="rate(3)"></ion-icon>
+            <ion-icon name="star" [ngClass]="{'filled': rating >= 4}" (mouseenter)="rating = 4" (mouseleave)="rating = 0" (click)="rate(4)"></ion-icon>
+            <ion-icon name="star" [ngClass]="{'filled': rating >= 5}" (mouseenter)="rating = 5" (mouseleave)="rating = 0" (click)="rate(5)"></ion-icon>
+          </div>
+          
+          
+        </ion-col>
       </ion-row>
     </ion-grid>
   </ion-card>
   <ion-infinite-scroll (ionInfinite)="cargarMasAutos()">
-    <ion-infinite-scroll-content
-      loadingText="Cargando ..."
-    ></ion-infinite-scroll-content>
+    <ion-infinite-scroll-content loadingText="Cargando ..."></ion-infinite-scroll-content>
   </ion-infinite-scroll>
 </ion-content>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime cum eligendi iusto quaerat sequi, quibusdam soluta illo praesentium, id molestiae dolorem officiis expedita eius inventore? Tempora consectetur quasi laboriosam quis.</p>
-<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime cum eligendi iusto quaerat sequi, quibusdam soluta illo praesentium, id molestiae dolorem officiis expedita eius inventore? Tempora consectetur quasi laboriosam quis.</p>
