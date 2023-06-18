@@ -1,0 +1,15 @@
+.rating {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+  }
+  
+  .star {
+    color: grey;
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .filled {
+    color: yellow;
+  }
