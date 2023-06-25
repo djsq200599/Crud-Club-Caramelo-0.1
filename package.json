@@ -5,12 +5,11 @@
   "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "json-server --watch db.json",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "db": "json-server --watch db.json"
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
