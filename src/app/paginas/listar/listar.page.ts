@@ -45,11 +45,11 @@ export class ListarPage implements OnInit {
   }
 
   
-  ShareApp(){
+  ShareApp(nombre, dir){
     Share.share({
-      title: 'Mira este increible auto',
-      text: 'Mira gratis tu proximo automovil aquí',
-      url: 'http://ionicframework.com/',
+      title: nombre,
+      text: dir,
+      url: 'http://www.clubcaramelo.com/',
     });
   }
 
