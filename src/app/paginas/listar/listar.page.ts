@@ -1,9 +1,12 @@
-import { Component, OnInit , ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ApiService } from 'src/app/services/api.service';
 import { IonInfiniteScroll } from '@ionic/angular';
 import { Share } from '@capacitor/share';
 import { CarritoService } from 'src/app/services/carrito.service';
 import { Automovil, AutomovilID } from 'src/app/modelo/automovil';
+import { Calificaciones, CalificacionesID } from 'src/app/modelo/calificaciones';
+import { NavController } from '@ionic/angular';
+
 @Component({
   selector: 'app-listar',
   templateUrl: './listar.page.html',
@@ -13,9 +16,12 @@ export class ListarPage implements OnInit {
   @ViewChild(IonInfiniteScroll)
   public scroll: IonInfiniteScroll;
   public autoMovil: Array<AutomovilID> = [];
+  calificacionesPromedio: { [id: number]: number } = {};
+
   constructor(
     public apiService: ApiService,
-    public apiCarrito: CarritoService
+    public apiCarrito: CarritoService,
+    private navController: NavController
   ) { }
 
   rating: number = 0;
@@ -23,29 +29,27 @@ export class ListarPage implements OnInit {
   ngOnInit() {}
 
   ionViewWillEnter() {
-    this.apiService.obtenerAutos()
-    this.apiService.listaAutos$.subscribe(datoAuto =>{
+    this.apiService.listaAutos$.subscribe(datoAuto => {
       this.autoMovil = datoAuto;
-      if (this.scroll){
+      if (this.scroll) {
         this.scroll.complete();
       }
-    })
+      this.loadCalificacionesPromedio();
+    });
+    this.apiService.obtenerAutos();
   }
 
-  
-  public cargarMasAutos(){
+  public cargarMasAutos() {
     this.apiService.obtenerMasAutos();
   }
 
-  addCart(automovil){
+  addCart(automovil) {
     this.apiCarrito.añadirAutosCarrito(automovil);
     alert('Producto agregado al carrito');
-    console.log(this.autoMovil)
-
+    console.log(this.autoMovil);
   }
 
-  
-  ShareApp(nombre, dir){
+  ShareApp(nombre, dir) {
     Share.share({
       title: nombre,
       text: dir,
@@ -55,15 +59,12 @@ export class ListarPage implements OnInit {
 
   rate(value: number) {
     if (this.rating === value) {
-      // Si la valoración seleccionada es la misma que la actual,
-      // deselecciona la estrella estableciendo el valor de rating a 0
       this.rating = 0;
     } else {
-      // Si la valoración seleccionada es diferente, asigna el nuevo valor
       this.rating = value;
     }
   }
-  
+
   highlightStar(value: number) {
     for (let i = 1; i <= 5; i++) {
       const starElement = document.getElementById(`star-${i}`);
@@ -74,12 +75,31 @@ export class ListarPage implements OnInit {
       }
     }
   }
-  
+
   resetStars() {
     for (let i = 1; i <= 5; i++) {
       const starElement = document.getElementById(`star-${i}`);
       starElement?.classList.remove('filled');
     }
   }
-}
 
+  async loadCalificacionesPromedio() {
+    for (const automovil of this.autoMovil) {
+      await this.get_stars(automovil.id);
+    }
+  }
+
+  async get_stars(id) {
+    let average = 0;
+    const calificaciones = await this.apiService.obtenerCalificaciones(id).toPromise();
+    if (calificaciones.length > 0) {
+      const totalStars = calificaciones.reduce((sum, calificacion) => sum + calificacion.stars, 0);
+      average = totalStars / calificaciones.length;
+    }
+    console.log(average);
+    this.calificacionesPromedio[id] = average;
+  }
+  goToMap(lat: number, lng: number) {
+    this.navController.navigateForward(['/mapa', { lat, lng }]);
+  }
+}

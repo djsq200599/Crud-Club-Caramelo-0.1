@@ -1,6 +1,7 @@
 import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '@angular/core';
 import { ActionSheetController } from '@ionic/angular';
 import { GmapsService } from './../../services/gmaps.service';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-mapa',
@@ -20,7 +21,8 @@ export class MapaPage implements OnInit, OnDestroy {
   constructor(
     private gmaps: GmapsService,
     private renderer: Renderer2,
-    private actionSheetCtrl: ActionSheetController
+    private actionSheetCtrl: ActionSheetController,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -58,7 +60,7 @@ export class MapaPage implements OnInit, OnDestroy {
   addMarker(location) {
     let googleMaps: any = this.googleMaps;
     const icon = {
-      url: 'assets/icons/location-pin.png',
+      url: 'assets/icon/location-pin.png',
       scaledSize: new googleMaps.Size(50, 50),
     };
     const marker = new googleMaps.Marker({
