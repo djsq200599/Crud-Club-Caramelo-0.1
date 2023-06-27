@@ -7,7 +7,7 @@ import { Observable, BehaviorSubject, ObservableLike } from 'rxjs';
   providedIn: 'root'
 })
 export class UsuarioService {
-  public URL_API="http://localhost:3000/usuario";
+  public URL_API="http://192.168.1.82:3000/usuario";
   constructor(private cliente: HttpClient) { }
 
   public agregarUsuario(payload: Usuario): Observable<UsuarioPartial> {

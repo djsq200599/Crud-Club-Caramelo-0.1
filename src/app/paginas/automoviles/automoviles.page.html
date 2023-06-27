@@ -34,6 +34,24 @@
           <ion-col></ion-col>
         </ion-row>
       </ion-grid>
+      <ion-card *ngFor="let a of musica">
+        <div class="card-image-wrapper">
+          <img [src]="a.foto" class="card-image" />
+        </div>
+        <ion-card-header>
+          <ion-card-title>{{ a.nombre }}</ion-card-title>
+          <ion-card-title>{{ a.detalle }}</ion-card-title>
+        </ion-card-header>
+      </ion-card>
+      <ion-card *ngFor="let a of productos">
+        <div class="card-image-wrapper">
+          <img [src]="a.foto" class="card-image" />
+        </div>
+        <ion-card-header>
+          <ion-card-title>{{ a.nombre }}</ion-card-title>
+          <ion-card-title>{{ a.detalle }}</ion-card-title>
+        </ion-card-header>
+      </ion-card>
     </ion-card-content>
   </ion-card>
 </ion-content>

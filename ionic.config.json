@@ -1,7 +1,8 @@
 {
   "name": "crud 1.0",
   "integrations": {
-    "capacitor": {}
+    "capacitor": {},
+    "cordova": {}
   },
   "type": "angular"
 }

@@ -1,8 +1,8 @@
 import { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'io.ionic.starter',
-  appName: 'crud 1.0',
+  appId: 'com.clubcaramelo.com',
+  appName: 'club-caramelo',
   webDir: 'www',
   bundledWebRuntime: false
 };

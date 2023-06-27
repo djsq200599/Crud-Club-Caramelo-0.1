@@ -2,6 +2,7 @@ import { Component, ElementRef, OnDestroy, OnInit, Renderer2, ViewChild } from '
 import { ActionSheetController } from '@ionic/angular';
 import { GmapsService } from './../../services/gmaps.service';
 import { ActivatedRoute, Params } from '@angular/router';
+import { LaunchNavigator, LaunchNavigatorOptions } from '@awesome-cordova-plugins/launch-navigator/ngx';
 
 @Component({
   selector: 'app-mapa',
@@ -10,7 +11,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class MapaPage implements OnInit, OnDestroy {
 
-  @ViewChild('map', {static: true}) mapElementRef: ElementRef;
+  @ViewChild('map', { static: true }) mapElementRef: ElementRef;
   googleMaps: any;
   center = { lat: -33.45694, lng: -70.64827 };
   map: any;
@@ -22,7 +23,8 @@ export class MapaPage implements OnInit, OnDestroy {
     private gmaps: GmapsService,
     private renderer: Renderer2,
     private actionSheetCtrl: ActionSheetController,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    private launchNavigator: LaunchNavigator
   ) { }
 
   ngOnInit(): void {
@@ -44,20 +46,12 @@ export class MapaPage implements OnInit, OnDestroy {
       });
       this.renderer.addClass(mapEl, 'visible');
       this.addMarker(location);
-      this.onMapClick();
-    } catch(e) {
+    } catch (e) {
       console.log(e);
     }
   }
 
-  onMapClick() {
-    this.mapClickListener = this.googleMaps.event.addListener(this.map, "click", (mapsMouseEvent) => {
-      console.log(mapsMouseEvent.latLng.toJSON());
-      this.addMarker(mapsMouseEvent.latLng);
-    });
-  }
-
-  addMarker(location) {
+  addMarker(location: any) {
     let googleMaps: any = this.googleMaps;
     const icon = {
       url: 'assets/icon/location-pin.png',
@@ -67,22 +61,36 @@ export class MapaPage implements OnInit, OnDestroy {
       position: location,
       map: this.map,
       icon: icon,
-      // draggable: true,
       animation: googleMaps.Animation.DROP
     });
     this.markers.push(marker);
-    // this.presentActionSheet();
-    this.markerClickListener = this.googleMaps.event.addListener(marker, 'click', () => {
-      console.log('markerclick', marker);
-      this.checkAndRemoveMarker(marker);
-      console.log('markers: ', this.markers);
+
+    const geocoder = new googleMaps.Geocoder();
+    geocoder.geocode({ location: location }, (results: any, status: any) => {
+      if (status === googleMaps.GeocoderStatus.OK && results[0]) {
+        const address = results[0].formatted_address;
+        marker.addListener('click', () => {
+          console.log('Click en el marcador', marker);
+          console.log('Dirección:', address);
+
+          // Redirigir a la aplicación de mapas con la ubicación seleccionada
+          const options: LaunchNavigatorOptions = {
+            start: '',  // Dirección actual del usuario
+            destinationName: address  // Dirección del marcador
+          };
+
+          this.launchNavigator.navigate(address, options)
+            .then(() => console.log('Aplicación de mapas lanzada'))
+            .catch((error) => console.error('Error al lanzar la aplicación de mapas: ', error));
+        });
+      }
     });
   }
 
   checkAndRemoveMarker(marker) {
     const index = this.markers.findIndex(x => x.position.lat() == marker.position.lat() && x.position.lng() == marker.position.lng());
     console.log('is marker already: ', index);
-    if(index >= 0) {
+    if (index >= 0) {
       this.markers[index].setMap(null);
       this.markers.splice(index, 1);
       return;
@@ -122,8 +130,8 @@ export class MapaPage implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     // this.googleMaps.event.removeAllListeners();
-    if(this.mapClickListener) this.googleMaps.event.removeListener(this.mapClickListener);
-    if(this.markerClickListener) this.googleMaps.event.removeListener(this.markerClickListener);
+    if (this.mapClickListener) this.googleMaps.event.removeListener(this.mapClickListener);
+    if (this.markerClickListener) this.googleMaps.event.removeListener(this.markerClickListener);
   }
 
 }
