@@ -59,7 +59,7 @@
       "correo": "djsq",
       "contraseña": "2005",
       "tipoUsuario": "admin",
-      "id": 2
+      "id": 1
     },
     {
       "correo": "user",
@@ -70,38 +70,38 @@
   ],
   "calificaciones": [
     {
-      "id" : 1,
-      "stars" : 2,
+      "id": 1,
+      "stars": 2,
       "comentario": "Buen local lenta atencion",
       "id_calificacion": 1
     },
     {
-      "id" : 1,
-      "stars" : 3,
+      "id": 2,
+      "stars": 3,
       "comentario": "Buen local lenta atencion",
       "id_calificacion": 2
     },
     {
-      "id" : 1,
-      "stars" : 5,
+      "id": 3,
+      "stars": 5,
       "comentario": "Buen local lenta atencion",
       "id_calificacion": 3
     },
     {
-      "id" : 1,
-      "stars" : 3,
+      "id": 4,
+      "stars": 3,
       "comentario": "Buen local lenta atencion",
       "id_calificacion": 4
     },
     {
-      "id" : 1,
-      "stars" : 5,
+      "id": 5,
+      "stars": 5,
       "comentario": "Buen local lenta atencion",
       "id_calificacion": 5
     },
     {
-      "id" : 1,
-      "stars" : 1,
+      "id": 6,
+      "stars": 1,
       "comentario": "Buen local lenta atencion",
       "id_calificacion": 6
     }

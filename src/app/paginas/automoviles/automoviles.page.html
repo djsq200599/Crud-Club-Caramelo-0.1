@@ -34,6 +34,7 @@
           <ion-col></ion-col>
         </ion-row>
       </ion-grid>
+      <p style="color: rgb(177, 121, 0); font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: large; text-align: center ;">Musica <ion-icon name="musical-notes"></ion-icon></p>
       <ion-card *ngFor="let a of musica">
         <div class="card-image-wrapper">
           <img [src]="a.foto" class="card-image" />
@@ -43,6 +44,7 @@
           <ion-card-title>{{ a.detalle }}</ion-card-title>
         </ion-card-header>
       </ion-card>
+      <p style="color: rgb(177, 121, 0); font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: large; text-align: center;">Comida <ion-icon name="restaurant"></ion-icon></p>
       <ion-card *ngFor="let a of productos">
         <div class="card-image-wrapper">
           <img [src]="a.foto" class="card-image" />
