@@ -51,8 +51,8 @@ export class ListarPage implements OnInit {
 
   ShareApp(nombre, dir) {
     Share.share({
-      title: nombre,
-      text: dir,
+      title: nombre + "\n",
+      text: nombre + "\n" + dir + "\n",
       url: 'http://www.clubcaramelo.com/',
     });
   }

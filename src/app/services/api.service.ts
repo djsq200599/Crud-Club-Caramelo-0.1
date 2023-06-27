@@ -11,8 +11,8 @@ import { Musica, MusicaID, MusicaPartial } from '../modelo/musica';
   providedIn: 'root'
 })
 export class ApiService {
-  private URL_API = 'http://192.168.1.82:3000/automovil';
-  private URL_CALIFICACIONES = 'http://192.168.1.82:3000/calificaciones';
+  private URL_API = 'http://200.112.69.224:3000/automovil';
+  private URL_CALIFICACIONES = 'http://200.112.69.224:3000/calificaciones';
   private URL_PRODUCTOS = 'https://special-succinct-cast.glitch.me/Productos';
   private URL_MUSICA = 'https://special-succinct-cast.glitch.me/Musica';
   private paginaActual = 1;
