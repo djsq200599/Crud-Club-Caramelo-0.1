@@ -11,7 +11,7 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-button [routerLink]="['/mapa']" size="medium" color="warning">
+          <ion-button (click)="goToMap(a.latitud, a.longitud)" size="medium" color="warning">
             <ion-icon name="map-outline"></ion-icon>
           </ion-button>
         </ion-col>
@@ -21,7 +21,7 @@
           </ion-button>
         </ion-col>
         <ion-col>
-          <ion-button (click)="ShareApp()" size="medium" color="warning">
+          <ion-button (click)="ShareApp(a.nombre, a.direccion)" size="medium" color="warning">
             <ion-icon name="share-outline"></ion-icon>
           </ion-button>
         </ion-col>
@@ -30,14 +30,12 @@
         <ion-col class="rating-col">
           <!-- Valoración con iconos de estrellas -->
           <div class="rating">
-            <ion-icon name="star" [ngClass]="{'filled': rating >= 1}" (mouseenter)="rating = 1" (mouseleave)="rating = 0" (click)="rate(1)"></ion-icon>
-            <ion-icon name="star" [ngClass]="{'filled': rating >= 2}" (mouseenter)="rating = 2" (mouseleave)="rating = 0" (click)="rate(2)"></ion-icon>
-            <ion-icon name="star" [ngClass]="{'filled': rating >= 3}" (mouseenter)="rating = 3" (mouseleave)="rating = 0" (click)="rate(3)"></ion-icon>
-            <ion-icon name="star" [ngClass]="{'filled': rating >= 4}" (mouseenter)="rating = 4" (mouseleave)="rating = 0" (click)="rate(4)"></ion-icon>
-            <ion-icon name="star" [ngClass]="{'filled': rating >= 5}" (mouseenter)="rating = 5" (mouseleave)="rating = 0" (click)="rate(5)"></ion-icon>
+            <ion-icon name="star" [ngClass]="{'filled': calificacionesPromedio[a.id] >= 1}"></ion-icon>
+            <ion-icon name="star" [ngClass]="{'filled': calificacionesPromedio[a.id] >= 1.7}"></ion-icon>
+            <ion-icon name="star" [ngClass]="{'filled': calificacionesPromedio[a.id] >= 2.7}"></ion-icon>
+            <ion-icon name="star" [ngClass]="{'filled': calificacionesPromedio[a.id] >= 3.7}"></ion-icon>
+            <ion-icon name="star" [ngClass]="{'filled': calificacionesPromedio[a.id] >= 4.7}"></ion-icon>
           </div>
-          
-          
         </ion-col>
       </ion-row>
     </ion-grid>

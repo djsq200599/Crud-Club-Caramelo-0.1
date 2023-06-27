@@ -6,11 +6,14 @@ export interface Automovil {
   capacidad: number;
   cantidad: number;
   precio: number;
+  latitud: number;
+  longitud: number;
   foto: string;
 }
 
 export interface AutomovilID extends Automovil {
   id?: number;
+  promedioCalificacion?: number;
 }
 
 export interface AutomovilPartial extends Partial<Automovil>{

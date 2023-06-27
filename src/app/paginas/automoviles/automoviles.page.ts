@@ -6,6 +6,8 @@ import { AlertController } from '@ionic/angular';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from 'src/app/services/api.service';
 import { IonInfiniteScroll } from '@ionic/angular';
+import { Producto, ProductoID } from 'src/app/modelo/productos';
+import { Musica, MusicaID } from 'src/app/modelo/musica';
 
 
 @Component({
@@ -17,21 +19,40 @@ export class AutomovilesPage implements OnInit {
   public idParametro: string = '';
   public autoActivo!: AutomovilID;
   public scroll: IonInfiniteScroll;
+  public productos: Array<ProductoID> = [];
+  public musica: Array<MusicaID> = [];
   constructor(
     private estaRuta: ActivatedRoute,
     private apiCarrito: CarritoService,
     private router: Router,
-    private apiAuto: ApiService,
+    private apiService: ApiService,
   ) {}
 
   ngOnInit() {
     this.estaRuta.params.subscribe(parametros => {
       this.idParametro = parametros.idAuto;
-      this.apiAuto.buscarPorID(+this.idParametro)
+      this.apiService.buscarPorID(+this.idParametro)
       .subscribe(auto => {
         this.autoActivo! = auto;
       })
     })
+  }
+  ionViewWillEnter() {
+    this.apiService.listaProducto$.subscribe(datoProductos => {
+      this.productos = datoProductos;
+      if (this.scroll) {
+        this.scroll.complete();
+      }
+    });
+    this.apiService.obtenerProductos();
+
+    this.apiService.listaMusica$.subscribe(datoMusica => {
+      this.musica = datoMusica;
+      if (this.scroll) {
+        this.scroll.complete();
+      }
+    });
+    this.apiService.obtenerMusica();
   }
 
   addCart(auto){

@@ -8,7 +8,7 @@ import { delay } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class CarritoService {
-  private URL_API = 'http://localhost:3000/automovil-carrito';
+  private URL_API = 'http://192.168.1.82:3000/automovil-carrito';
   Automoviles: any;
   cart=[];
   private paginaActual = 1;

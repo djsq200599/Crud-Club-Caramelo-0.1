@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 import { MapaPageRoutingModule } from './mapa-routing.module';
 
 import { MapaPage } from './mapa.page';
+import { LaunchNavigator } from '@awesome-cordova-plugins/launch-navigator/ngx';
 
 @NgModule({
   imports: [
@@ -15,6 +16,9 @@ import { MapaPage } from './mapa.page';
     IonicModule,
     MapaPageRoutingModule
   ],
-  declarations: [MapaPage]
+  declarations: [MapaPage],
+  providers: [
+    LaunchNavigator
+  ]
 })
 export class MapaPageModule {}

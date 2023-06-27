@@ -1,0 +1,14 @@
+.card-image-wrapper {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%; /* Proporción de aspecto de 16:9 (9 / 16 * 100) */
+  }
+  
+  .card-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ajusta la imagen para llenar el contenedor */
+  }
