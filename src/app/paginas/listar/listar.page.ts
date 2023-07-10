@@ -46,7 +46,6 @@ export class ListarPage implements OnInit {
   addCart(automovil) {
     this.apiCarrito.añadirAutosCarrito(automovil);
     alert('Producto agregado al carrito');
-    console.log(this.autoMovil);
   }
 
   ShareApp(nombre, dir) {
@@ -91,12 +90,11 @@ export class ListarPage implements OnInit {
 
   async get_stars(id) {
     let average = 0;
-    const calificaciones = await this.apiService.obtenerCalificaciones(id).toPromise();
+    const calificaciones = await this.apiService.obtenerCalificacionesLocalID(id).toPromise();
     if (calificaciones.length > 0) {
       const totalStars = calificaciones.reduce((sum, calificacion) => sum + calificacion.stars, 0);
       average = totalStars / calificaciones.length;
     }
-    console.log(average);
     this.calificacionesPromedio[id] = average;
   }
   goToMap(lat: number, lng: number) {

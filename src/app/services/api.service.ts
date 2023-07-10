@@ -3,18 +3,20 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Automovil, AutomovilID, AutomovilPartial } from '../modelo/automovil';
 import { delay } from 'rxjs/operators';
-import { Calificaciones, CalificacionesID, CalificacionesPartial } from '../modelo/calificaciones';
+import { Calificaciones, CalificacionesID, CalificacionesLocalID, CalificacionesPartial } from '../modelo/calificaciones';
 import { Producto, ProductoID, ProductoPartial } from '../modelo/productos';
 import { Musica, MusicaID, MusicaPartial } from '../modelo/musica';
+import { Capacidad, CapacidadID, CapacidadPartial } from '../modelo/capacidad';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApiService {
-  private URL_API = 'http://localhost:3000/automovil';
-  private URL_CALIFICACIONES = 'http://localhost:3000/calificaciones';
+  private URL_API = 'http://200.112.76.61:3000/automovil';
+  private URL_CALIFICACIONES = 'http://200.112.76.61:3000/calificaciones';
   private URL_PRODUCTOS = 'https://special-succinct-cast.glitch.me/Productos';
   private URL_MUSICA = 'https://special-succinct-cast.glitch.me/Musica';
+  private URL_CAPACIDAD = 'https://contador-personas-b48c4-default-rtdb.firebaseio.com/locales.json';
   private paginaActual = 1;
   private listaAutos = new BehaviorSubject<Array<AutomovilID>>([]);
   public listaAutos$ = this.listaAutos.asObservable();
@@ -22,6 +24,12 @@ export class ApiService {
   public listaMusica$ = this.listaMusica.asObservable();
   private listaProducto = new BehaviorSubject<Array<ProductoID>>([]);
   public listaProducto$ = this.listaProducto.asObservable();
+  private listaCapacidad = new BehaviorSubject<Array<CapacidadID>>([]);
+  public listaCapacidad$ = this.listaCapacidad.asObservable();
+  private listaCalificaciones = new BehaviorSubject<Array<CalificacionesID>>([]);
+  public listaCalificaciones$ = this.listaCalificaciones.asObservable();
+  private listaCalificacionesLocal = new BehaviorSubject<Array<CalificacionesLocalID>>([]);
+  public listaCalificacionesLocal$ = this.listaCalificacionesLocal.asObservable();
 
   constructor(private cliente: HttpClient) { }
 
@@ -71,8 +79,16 @@ export class ApiService {
     });
   }
 
-  public obtenerCalificaciones(idcalif: number): Observable<CalificacionesID[]> {
+  public obtenerCalificaciones(): Observable<CalificacionesID[]> {
+    return this.cliente.get<CalificacionesID[]>(this.URL_CALIFICACIONES);
+  }
+
+  public obtenerCalificacionesID(idcalif: number): Observable<CalificacionesID[]> {
     return this.cliente.get<CalificacionesID[]>(`${this.URL_CALIFICACIONES}?id=${idcalif}`);
+  }
+
+  public obtenerCalificacionesLocalID(idCalificacion: number): Observable<CalificacionesLocalID[]> {
+    return this.cliente.get<CalificacionesLocalID[]>(`${this.URL_CALIFICACIONES}?id_calificacion=${idCalificacion}`);
   }
 
   public agregarCalificacion(calificacion: Calificaciones): Observable<CalificacionesID> {
@@ -164,6 +180,41 @@ export class ApiService {
 
   public modificarMusicaPorID(id: number, Musica: ProductoPartial): Observable<any> {
     return this.cliente.patch(`${this.URL_MUSICA}/${id}`, Musica, {
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+      }
+    });
+  }
+
+  public obtenerCapacidad() {
+    this.cliente.get<Array<CapacidadID>>(`${this.URL_CAPACIDAD}`)
+      .pipe(
+        delay(2000)
+      )
+      .subscribe(resultado => {
+        this.paginaActual = this.paginaActual + 1;
+        this.listaCapacidad.next(resultado);
+      });
+  }
+
+  public agregarCapacidad(Capacidad: Producto): Observable<CapacidadID> {
+    return this.cliente.post<CapacidadID>(this.URL_CAPACIDAD, Capacidad, {
+      headers: {
+        'Content-Type': 'application/json; charset=utf-8'
+      }
+    });
+  }
+
+  public buscarCapacidadPorID(id: number): Observable<CapacidadID | null> {
+    return this.cliente.get<CapacidadID | null>(`${this.URL_CAPACIDAD}/${id}`);
+  }
+
+  public borrarCapacidadPorID(id: number): Observable<any> {
+    return this.cliente.delete(`${this.URL_CAPACIDAD}/${id}`);
+  }
+
+  public modificarCapacidadPorID(id: number, Capacidad: ProductoPartial): Observable<any> {
+    return this.cliente.patch(`${this.URL_CAPACIDAD}/${id}`, Capacidad, {
       headers: {
         'Content-Type': 'application/json; charset=utf-8'
       }

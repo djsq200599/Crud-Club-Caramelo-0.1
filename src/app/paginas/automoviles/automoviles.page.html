@@ -25,8 +25,7 @@
       <br>
       <ion-card-subtitle>Ubicacion: {{ autoActivo.ubicacion }}</ion-card-subtitle>
       <ion-card-subtitle>Tematica: {{ autoActivo.tematica }}</ion-card-subtitle>
-      <ion-card-subtitle>Capacidad: {{ autoActivo.capacidad }}</ion-card-subtitle>
-      <ion-card-subtitle>Cantidad: {{ autoActivo.cantidad }}</ion-card-subtitle>
+      <ion-card-subtitle>Capacidad: {{ caplocal?.cantidad }}/{{ caplocal?.capacidad }} (En el local/maxima)</ion-card-subtitle>
       <ion-card-subtitle>Precio: {{ autoActivo.precio | currency: 'CLP' }}</ion-card-subtitle>
       <br>
       <ion-grid>
@@ -55,6 +54,40 @@
           <ion-card-title>{{ a.nombre }}</ion-card-title>
           <ion-card-title>{{ a.detalle }}</ion-card-title>
         </ion-card-header>
+      </ion-card>
+      <p style="color: rgb(177, 121, 0); font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-size: large; text-align: center;">Calificaciones y Comentarios <ion-icon name="star-half-outline"></ion-icon></p>
+      <ion-card>
+        <ion-card-header>
+          <ion-card-title>Calificar y comentar</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="rating">
+            <ion-icon name="star" (click)="rate(1)" [ngClass]="{'filled': rating >= 1}"></ion-icon>
+            <ion-icon name="star" (click)="rate(2)" [ngClass]="{'filled': rating >= 2}"></ion-icon>
+            <ion-icon name="star" (click)="rate(3)" [ngClass]="{'filled': rating >= 3}"></ion-icon>
+            <ion-icon name="star" (click)="rate(4)" [ngClass]="{'filled': rating >= 4}"></ion-icon>
+            <ion-icon name="star" (click)="rate(5)" [ngClass]="{'filled': rating >= 5}"></ion-icon>
+          </div>
+          <ion-item>
+            <ion-textarea rows="3" [(ngModel)]="comentario" placeholder="Escribe tu comentario"></ion-textarea>
+          </ion-item>
+          <ion-button expand="full" (click)="enviarComentario()">Enviar Comentario</ion-button>
+        </ion-card-content>
+      </ion-card>    
+
+      <ion-card *ngFor="let calificacion of Calificaciones">
+        <ion-card-header>
+          <div class="rating">
+            <ion-icon name="star" [ngClass]="{'filled': calificacion.stars >= 1}"></ion-icon>
+            <ion-icon name="star" [ngClass]="{'filled': calificacion.stars >= 1.7}"></ion-icon>
+            <ion-icon name="star" [ngClass]="{'filled': calificacion.stars >= 2.7}"></ion-icon>
+            <ion-icon name="star" [ngClass]="{'filled': calificacion.stars >= 3.7}"></ion-icon>
+            <ion-icon name="star" [ngClass]="{'filled': calificacion.stars >= 4.7}"></ion-icon>
+          </div>
+        </ion-card-header>
+        <ion-card-content>
+          <div class="comentario">{{ calificacion.comentario }}</div>
+        </ion-card-content>
       </ion-card>
     </ion-card-content>
   </ion-card>
