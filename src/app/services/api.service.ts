@@ -12,8 +12,8 @@ import { Capacidad, CapacidadID, CapacidadPartial } from '../modelo/capacidad';
   providedIn: 'root'
 })
 export class ApiService {
-  private URL_API = 'http://200.112.76.61:3000/automovil';
-  private URL_CALIFICACIONES = 'http://200.112.76.61:3000/calificaciones';
+  private URL_API = 'http://localhost:3000/automovil';
+  private URL_CALIFICACIONES = 'http://localhost:3000/calificaciones';
   private URL_PRODUCTOS = 'https://special-succinct-cast.glitch.me/Productos';
   private URL_MUSICA = 'https://special-succinct-cast.glitch.me/Musica';
   private URL_CAPACIDAD = 'https://contador-personas-b48c4-default-rtdb.firebaseio.com/locales.json';
